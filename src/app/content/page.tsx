@@ -12,21 +12,21 @@ const page = () => {
     <div className="flex flex-col items-center justify-start w-full min-h-full px-20 gap-4">
       {/* Header Section */}
       <div className="bg-[#62ABA4] rounded-[8px] px-8 shadow-lg text-white text-center">
-        <h1 className="text-3xl font-baloo">Content</h1>
+        <h1 className="text-3xl font-baloo text-black">Content</h1>
         <p className="font-sarabun">ความรู้ทั่วไป</p>
       </div>
 
       {/* Buttons */}
-      <button className="bg-[#AADAD5] w-full min-h-[40px] px-8 border border-white text-xl">
+      <button className="bg-[#AADAD5] font-sarabun w-full min-h-[40px] px-8 border border-white text-xl">
         สาเหตุของการติดเชื้อ
       </button>
-      <button className="bg-[#AADAD5] w-full min-h-[40px] px-8 border border-white text-xl">
+      <button className="bg-[#AADAD5] font-sarabun w-full min-h-[40px] px-8 border border-white text-xl">
         อาการและอาการแสดงจากการติดเชื้อ
       </button>
-      <button className="bg-[#AADAD5] w-full min-h-[40px] px-8 border border-white text-xl">
+      <button className="bg-[#AADAD5] font-sarabun w-full min-h-[40px] px-8 border border-white text-xl">
         การป้องกันการติดเชื้อของแผล
       </button>
-      <button className="bg-[#AADAD5] w-full min-h-[40px] px-8 py-2 border border-white text-xl">
+      <button className="bg-[#AADAD5] font-sarabun w-full min-h-[40px] px-8 py-2 border border-white text-xl">
         การดูแลแผลผ่าตัด
       </button>
     </div>
