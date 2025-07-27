@@ -1,5 +1,5 @@
-import MenuBar from "@/component/menu_bar";
-import React from "react";
+import MenuBar from '@/component/menu_bar';
+import React from 'react';
 
 const page = () => {
   return (
