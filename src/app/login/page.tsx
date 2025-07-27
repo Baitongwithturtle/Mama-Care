@@ -1,13 +1,11 @@
 "use client";
 import React from 'react'
 import Image from 'next/image'
-import { useRouter } from "next/navigation";
-
+import { signInWithGoogle } from "@/app/firebase/auth";
 const page = () => {
-  const router = useRouter();
 
   function handleLogin() {
-    router.push("/content");
+    signInWithGoogle()
   }
   return (
     <div className='bg-[#FCF9DA] flex-col mobile flex gap-10 items-center justify-between'>
