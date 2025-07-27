@@ -1,5 +1,5 @@
-"use client";
-import React, { useEffect, useState } from "react";
+'use client';
+import React, { useEffect, useState } from 'react';
 interface Question {
   id: number;
   question: string;
@@ -12,7 +12,7 @@ const quiz = ({ question }: { question: Question | null }) => {
     <div className="bg-white w-full h-full flex flex-col justify-center items-center px-[20px] py-[40px] rounded-[20px]">
       <div className="relative w-fit">
         <img
-          src={"/assets/state/sparkle.webp"}
+          src={'/assets/state/sparkle.webp'}
           alt="sparkle"
           width={60}
           className="rotate-180 absolute left-[-80px] top-[-20px]"
@@ -26,7 +26,7 @@ const quiz = ({ question }: { question: Question | null }) => {
           </span>
         </header>
         <img
-          src={"/assets/state/sparkle.webp"}
+          src={'/assets/state/sparkle.webp'}
           alt="sparkle"
           width={60}
           className="absolute right-[-80px] top-[40px]"
@@ -50,13 +50,13 @@ const quiz = ({ question }: { question: Question | null }) => {
     ${
       answer
         ? index + 1 === question.answer
-          ? "bg-[#9EE76B]" // ถูก
+          ? 'bg-[#9EE76B]' // ถูก
           : index + 1 === answer
-          ? "bg-[#FF6C6C]" // ตอบผิด
-          : "bg-[#FFD0D8]" // ปุ่มอื่น
-        : "bg-[#FFD0D8]" // ยังไม่ตอบ
+            ? 'bg-[#FF6C6C]' // ตอบผิด
+            : 'bg-[#FFD0D8]' // ปุ่มอื่น
+        : 'bg-[#FFD0D8]' // ยังไม่ตอบ
     }`}
-                  onClick={() => answer?undefined:setAnswer(index + 1)}
+                  onClick={() => (answer ? undefined : setAnswer(index + 1))}
                 >
                   {choice}
                 </button>
