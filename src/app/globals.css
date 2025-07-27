@@ -27,7 +27,7 @@
 }
 
 .mobile {
-    display: relative;
+    position: relative;
     max-width: 448px;
     margin: 0 auto;
     min-height: 100vh;
