@@ -74,6 +74,6 @@ export const signInWithGoogle = async () => {
       console.error('Unexpected error:', error);
     }
   } finally {
-    window.location.href = '/quiz';
+    window.location.href = '/content';
   }
 };
