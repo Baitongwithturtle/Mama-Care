@@ -22,12 +22,18 @@ const page = () => {
     }
   }, [params.id]);
   return (
-    <div className="mobile flex flex-col items-center justify-between">
+    <div className="mobile flex flex-col items-center justify-between relative overflow-hidden">
       <section className="flex flex-col items-center gap-4">
         <img alt="curve" src="/assets/1.webp" className="rotate-180" />
         <div className="px-[20px] w-full">
           <Quiz question={quiz} />
         </div>
+        <button
+          className="bg-[#F0818C] h-[32px] px-6 rounded-md font-sarabun text-[14px] text-white"
+          onClick={() => (window.location.href = '/quiz')}
+        >
+          ย้อนกลับ
+        </button>
       </section>
       <img alt="frame" src="/assets/1.webp" />
     </div>

@@ -1,15 +1,73 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useParams } from 'next/navigation';
+
 interface Question {
   id: number;
   question: string;
   choices: string[];
   answer: number;
 }
-const quiz = ({ question }: { question: Question | null }) => {
-  const [answer, setAnswer] = useState<number>();
+
+const Quiz = ({ question }: { question: Question | null }) => {
+  const [answer, setAnswer] = useState<number | undefined>(undefined);
+  const [showFeedback, setShowFeedback] = useState<boolean>(false);
+  const uID =
+    typeof window !== 'undefined' ? localStorage.getItem('uID') : null;
+  const params = useParams();
+
+  async function updateQuizScore(uID: string, score: boolean) {
+    try {
+      const response = await fetch(`/api/quiz/${uID}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          uID,
+          quizNumber: params.quiz_id,
+          score,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        console.error('❌ Error:', data.message);
+      } else {
+        console.log('✅ Success:', data.message);
+      }
+
+      return data;
+    } catch (error) {
+      console.error('❌ Fetch error:', error);
+    }
+  }
+
+  async function handleAnswer(selectedIndex: number, isCorrect: boolean) {
+    if (answer !== undefined) return;
+    setAnswer(selectedIndex + 1);
+    setShowFeedback(true);
+
+    if (uID && params.quiz_id) {
+      await updateQuizScore(uID, isCorrect);
+    } else {
+      console.warn('Missing uID or quiz_id', { uID, quiz_id: params.quiz_id });
+    }
+  }
+
+  useEffect(() => {
+    if (answer !== undefined) {
+      const timeout = setTimeout(() => {
+        setShowFeedback(false);
+      }, 2000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [answer]);
+
   return (
-    <div className="bg-white w-full h-full flex flex-col justify-center items-center px-[20px] py-[40px] rounded-[20px]">
+    <div className="bg-white w-full h-full flex flex-col justify-center items-center px-[20px] py-[40px] rounded-[20px] overflow-hidden">
       <div className="relative w-fit">
         <img
           src={'/assets/state/sparkle.webp'}
@@ -32,8 +90,38 @@ const quiz = ({ question }: { question: Question | null }) => {
           className="absolute right-[-80px] top-[40px]"
         />
       </div>
+
       {question ? (
         <>
+          <AnimatePresence>
+            {answer !== undefined && showFeedback && (
+              <>
+                {[...Array(10)].map((_, i) => {
+                  const randomX = Math.floor(Math.random() * 100);
+                  const delay = i * 0.1;
+
+                  return (
+                    <motion.div
+                      className="z-10"
+                      key={i}
+                      initial={{ y: -420, opacity: 0.5 }}
+                      animate={{ y: 600, opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 2, delay }}
+                      style={{
+                        position: 'absolute',
+                        left: `${randomX}%`,
+                        fontSize: '48px',
+                        pointerEvents: 'none',
+                      }}
+                    >
+                      {question.answer === answer ? '🥳' : '😭'}
+                    </motion.div>
+                  );
+                })}
+              </>
+            )}
+          </AnimatePresence>
           <p className="mt-10 text-lg font-sarabun font-semibold">
             {question.question}
           </p>
@@ -47,23 +135,25 @@ const quiz = ({ question }: { question: Question | null }) => {
                 </div>
                 <button
                   className={`w-full min-h-[44px] rounded-[12px] transition-colors duration-300 hover:[box-shadow:0_0_20px_0_#FFD0D8]
-    ${
-      answer
-        ? index + 1 === question.answer
-          ? 'bg-[#9EE76B]' // ถูก
-          : index + 1 === answer
-            ? 'bg-[#FF6C6C]' // ตอบผิด
-            : 'bg-[#FFD0D8]' // ปุ่มอื่น
-        : 'bg-[#FFD0D8]' // ยังไม่ตอบ
-    }`}
-                  onClick={() => (answer ? undefined : setAnswer(index + 1))}
+                  ${
+                    answer !== undefined
+                      ? index + 1 === question.answer
+                        ? 'bg-[#9EE76B]'
+                        : index + 1 === answer
+                          ? 'bg-[#FF6C6C]'
+                          : 'bg-[#FFD0D8]'
+                      : 'bg-[#FFD0D8]'
+                  }`}
+                  onClick={() =>
+                    handleAnswer(index, index + 1 === question.answer)
+                  }
+                  disabled={answer !== undefined} // ป้องกันตอบซ้ำ
                 >
                   {choice}
                 </button>
               </li>
             ))}
           </ul>
-          {/* <button className="bg-[#F0818C] h-[32px] px-6 rounded-md mt-4 self-end font-sarabun text-[14px] text-white">ยืนยัน</button> */}
         </>
       ) : (
         <p>Loading...</p>
@@ -72,4 +162,4 @@ const quiz = ({ question }: { question: Question | null }) => {
   );
 };
 
-export default quiz;
+export default Quiz;

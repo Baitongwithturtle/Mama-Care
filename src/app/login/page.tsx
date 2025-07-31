@@ -1,7 +1,8 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { signInWithGoogle } from '@/app/firebase/auth';
+
 const page = () => {
   function handleLogin() {
     signInWithGoogle();
