@@ -1,6 +1,5 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { app } from './client';
-
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
@@ -21,7 +20,7 @@ export const validateSession = () => {
     alert('Invalid session. Please sign in again.');
     auth.signOut();
     sessionStorage.clear();
-    window.location.href = '/login'; // Redirect user
+    window.location.href = '/login';
   }
 };
 
@@ -33,16 +32,39 @@ export const signInWithGoogle = async () => {
     const user = result.user;
 
     if (token) saveToken(token);
+    localStorage.setItem('uID', user.uid);
 
     if (user) {
       const sessionKey = generateSessionKey();
       sessionStorage.setItem('sessionKey', sessionKey);
     }
 
-    console.log('User signed in:', user);
-    console.log('Access Token:', token);
+    const res = await fetch('/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        uID: user.uid,
+        email: user.email,
+        name: user.displayName,
+      }),
+    });
 
-    return { user, token };
+    const data = await res.json();
+
+    if (res.status === 409) {
+      console.warn('User already exists:', data.message);
+      return { user, token, exists: true };
+    }
+
+    if (!res.ok) {
+      console.error('Error creating user:', data.message);
+      return null;
+    }
+
+    console.log('User signed in and created:', user);
+    return { user, token, exists: false };
   } catch (error: unknown) {
     if (error instanceof Error && 'code' in error) {
       const firebaseError = error as { code: string; message: string };
