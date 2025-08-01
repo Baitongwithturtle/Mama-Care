@@ -10,7 +10,7 @@ export default function Home() {
   }
   return (
     <div
-      className="mobile flex flex-col items-center justify-between"
+      className="flex flex-col mobile items-center justify-between"
       onClick={loginpage}
     >
       <img alt="frame" src="assets/5.webp"></img>
@@ -23,13 +23,13 @@ export default function Home() {
       <img
         alt="center mama care"
         src="assets/2.webp"
-        width={350}
+        width={250}
         height={0}
       ></img>
       <img
         alt="center mama care"
         src="assets/3.webp"
-        width={350}
+        width={200}
         height={0}
       ></img>
       <img alt="frame" src="assets/1.webp"></img>
