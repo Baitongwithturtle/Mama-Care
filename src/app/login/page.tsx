@@ -8,7 +8,7 @@ const page = () => {
     signInWithGoogle();
   }
   return (
-    <div className="bg-[#FCF9DA] flex-col mobile flex gap-10 items-center justify-between">
+    <div className="flex flex-col mobile  items-center justify-between">
       <img alt="curve" src="assets/1.webp" className="rotate-180"></img>
       <img
         alt="center mama care"
@@ -28,7 +28,7 @@ const page = () => {
 
       <button
         onClick={handleLogin}
-        className="flex items-center justify-center gap-2 px-20 py-2 bg-white border border-[#DD6774] rounded-full shadow hover:bg-gray-100 transition"
+        className="flex items-center justify-center gap-2 px-20 py-2 bg-white border border-[#DD6774] rounded-full shadow hover:bg-[#FFD0D8] transition"
       >
         <img
           alt="google icon"
