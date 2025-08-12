@@ -34,7 +34,7 @@ export async function signInWithGoogle() {
     });
   }
 
-  //window.location.href = "/content";
+  window.location.href = "/content";
 }
 
 export async function signOutAll() {
