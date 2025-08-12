@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowBigUp } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import MenuBar from '@/component/menu_bar';
 
 const Page = () => {
   const [prompt, setPrompt] = useState('');
@@ -41,13 +42,18 @@ const Page = () => {
   }
 
   return (
-    <div className="mobile max-h-screen flex flex-col py-9">
-      <img src="assets/5.webp" alt="frame" className="absolute top-0" />
+    <div className="mobile max-h-screen flex flex-col pb-9 pt-12 relative">
+      <img
+        src="assets/5.webp"
+        alt="frame"
+        className="fixed top-0 object-cover w-[447.96px] h-[36.5px]"
+      />
 
       {/* หัวข้อแชท */}
       <div className="text-[32px] font-extrabold font-sarabun text-center text-[#F0818C]">
         Chat with AI
       </div>
+      <MenuBar />
 
       {/* พื้นที่แสดงข้อความ */}
       <div className="flex flex-col flex-1 overflow-y-auto py-4 px-[20px] space-y-3 max-h-full">
@@ -94,7 +100,11 @@ const Page = () => {
           </button>
         </div>
       </div>
-      <img alt="curve" src="assets/1.webp" className="absolute bottom-0" />
+      <img
+        alt="curve"
+        src="assets/1.webp"
+        className="fixed bottom-0 object-cover w-[447.96px] h-[36.5px]"
+      />
     </div>
   );
 };

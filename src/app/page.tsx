@@ -10,20 +10,24 @@ export default function Home() {
   }
   return (
     <div
-      className="flex flex-col mobile items-center justify-between"
+      className="flex flex-col mobile items-center justify-center gap-2"
       onClick={loginpage}
     >
-      <img alt="frame" src="assets/5.webp"></img>
+      <img
+        src="assets/5.webp"
+        alt="frame"
+        className="fixed top-0 object-cover w-[447.96px] h-[36.5px]"
+      />
       <img
         alt="center mama care"
         src="assets/4.webp"
-        width={350}
+        width={320}
         height={0}
       ></img>
       <img
         alt="center mama care"
         src="assets/2.webp"
-        width={250}
+        width={220}
         height={0}
       ></img>
       <img
@@ -32,7 +36,11 @@ export default function Home() {
         width={200}
         height={0}
       ></img>
-      <img alt="frame" src="assets/1.webp"></img>
+      <img
+        alt="curve"
+        src="assets/1.webp"
+        className="fixed bottom-0 object-cover w-[447.96px] h-[36.5px]"
+      />
     </div>
   );
 }

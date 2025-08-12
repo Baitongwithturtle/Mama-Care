@@ -68,15 +68,15 @@ const Quiz = ({ question }: { question: Question | null }) => {
 
   return (
     <div className="bg-white w-full h-full flex flex-col justify-center items-center px-[20px] py-[40px] rounded-[20px] overflow-hidden">
-      <div className="relative w-fit">
+      <div className="relative py-4">
         <img
-          src={'/assets/state/sparkle.webp'}
+          src="/assets/state/sparkle.webp"
           alt="sparkle"
           width={60}
-          className="rotate-180 absolute left-[-80px] top-[-20px]"
+          className="rotate-180 absolute left-[-80px] top-0"
         />
         <header className="flex flex-col items-end">
-          <h1 className="font-baloo text-[64px] leading-[64px] font-extrabold text-[#F0818C]">
+          <h1 className="font-baloo text-[48px] leading-[48px] font-extrabold text-[#F0818C]">
             QUIZ
           </h1>
           <span className="font-sarabun text-[14px] font-bold">
@@ -84,10 +84,10 @@ const Quiz = ({ question }: { question: Question | null }) => {
           </span>
         </header>
         <img
-          src={'/assets/state/sparkle.webp'}
+          src="/assets/state/sparkle.webp"
           alt="sparkle"
           width={60}
-          className="absolute right-[-80px] top-[40px]"
+          className="absolute right-[-80px] bottom-4"
         />
       </div>
 

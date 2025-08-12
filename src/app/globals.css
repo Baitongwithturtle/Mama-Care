@@ -15,6 +15,7 @@
   --font-mono: var(--font-geist-mono);
   --font-sarabun: 'Sarabun', sans-serif;
   --font-baloo: 'Baloo Bhaijaan 2', cursive;
+  --color-pinky: #f0818c;
 }
 
 @media (prefers-color-scheme: dark) {

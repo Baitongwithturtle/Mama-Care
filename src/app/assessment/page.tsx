@@ -64,17 +64,23 @@ const page = () => {
     },
   ];
   return (
-    <div className="mobile flex flex-col justify-between">
-      <section>
-        <img src="assets/5.webp" alt="frame" />
-        <div className="px-[20px] mt-4">
-          <h1 className="text-[32px] font-extrabold font-sarabun text-center text-[#F0818C]">
-            ความพึงพอใจในการใช้ <span className="text-nowrap">MaMa Care</span>
-          </h1>
-          <Assessment prop={form} />
-        </div>
-      </section>
-      <img src="assets/1.webp" alt="frame" />
+    <div className="mobile flex flex-col justify-between pt-12 pb-9">
+      <img
+        src="assets/5.webp"
+        alt="frame"
+        className="fixed top-0 object-cover w-[447.96px] h-[36.5px]"
+      />
+      <div className="px-[20px] mt-4">
+        <h1 className="text-[32px] font-extrabold font-sarabun text-center text-[#F0818C]">
+          ความพึงพอใจในการใช้ <span className="text-nowrap">MaMa Care</span>
+        </h1>
+        <Assessment prop={form} />
+      </div>
+      <img
+        alt="curve"
+        src="assets/1.webp"
+        className="fixed bottom-0 object-cover w-[447.96px] h-[36.5px]"
+      />
     </div>
   );
 };

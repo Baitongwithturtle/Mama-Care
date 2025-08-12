@@ -1,6 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
-import Image from 'next/image';
+import React from 'react';
 import { signInWithGoogle } from '@/app/firebase/auth';
 
 const page = () => {
@@ -8,12 +7,16 @@ const page = () => {
     signInWithGoogle();
   }
   return (
-    <div className="flex flex-col mobile  items-center justify-between">
-      <img alt="curve" src="assets/1.webp" className="rotate-180"></img>
+    <div className="flex flex-col mobile  items-center justify-center gap-8 pt-12 pb-9">
+      <img
+        src="assets/5.webp"
+        alt="frame"
+        className="absolute top-0 object-cover w-[447.96px] h-[36.5px]"
+      />
       <img
         alt="center mama care"
         src="assets/4.webp"
-        width={350}
+        width={320}
         height={0}
       ></img>
 
@@ -28,7 +31,7 @@ const page = () => {
 
       <button
         onClick={handleLogin}
-        className="flex items-center justify-center gap-2 px-20 py-2 bg-white border border-[#DD6774] rounded-full shadow hover:bg-[#FFD0D8] transition"
+        className="flex items-center justify-center gap-2 px-20 py-2 bg-white border border-[#DD6774] rounded-full shadow hover:bg-[#fff2f6] transition"
       >
         <img
           alt="google icon"
@@ -42,7 +45,11 @@ const page = () => {
       </button>
 
       <img alt="foot" src="assets/3.webp" width={200} />
-      <img alt="curve" src="assets/1.webp" />
+      <img
+        alt="curve"
+        src="assets/1.webp"
+        className="absolute bottom-0 object-cover w-[447.96px] h-[36.5px]"
+      />
     </div>
   );
 };

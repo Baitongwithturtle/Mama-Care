@@ -1,79 +1,46 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { app } from './client';
+
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Store token in sessionStorage (valid only for the session)
-const saveToken = (token: string) =>
-  sessionStorage.setItem('accessToken', token);
+export async function signInWithGoogle() {
+  const result = await signInWithPopup(auth, provider);
+  const user = result.user;
+  const idToken = await user.getIdToken(true);
 
-// Generate a session fingerprint to track the session
-const generateSessionKey = (): string =>
-  btoa(`${navigator.userAgent}-${Math.random()}`);
+  // สร้าง session cookie
+  const sessionResp = await fetch('/api/session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken }),
+    credentials: 'include',
+  });
+  if (!sessionResp.ok) throw new Error('Session creation failed');
 
-export const validateSession = () => {
-  const storedSession = sessionStorage.getItem('sessionKey');
-  if (
-    !storedSession ||
-    storedSession !== sessionStorage.getItem('sessionKey')
-  ) {
-    alert('Invalid session. Please sign in again.');
-    auth.signOut();
-    sessionStorage.clear();
-    window.location.href = '/login';
-  }
-};
+  localStorage.setItem('uID', user.uid);
 
-export const signInWithGoogle = async () => {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential?.accessToken ?? null;
-    const user = result.user;
-
-    if (token) saveToken(token);
-    localStorage.setItem('uID', user.uid);
-
-    if (user) {
-      const sessionKey = generateSessionKey();
-      sessionStorage.setItem('sessionKey', sessionKey);
-    }
-
-    const res = await fetch('/api/users', {
+  // เช็คว่ามี user ใน DB หรือยัง
+  const checkResp = await fetch(`/api/users/${user.uid}`, {
+    credentials: 'include',
+  });
+  if (checkResp.status === 404) {
+    // ไม่มี → สร้างใหม่
+    await fetch('/api/users', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        uID: user.uid,
-        email: user.email,
-        name: user.displayName,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email: user.email, name: user.displayName }),
     });
-
-    const data = await res.json();
-
-    if (res.status === 409) {
-      console.warn('User already exists:', data.message);
-      return { user, token, exists: true };
-    }
-
-    if (!res.ok) {
-      console.error('Error creating user:', data.message);
-      return null;
-    }
-
-    console.log('User signed in and created:', user);
-    return { user, token, exists: false };
-  } catch (error: unknown) {
-    if (error instanceof Error && 'code' in error) {
-      const firebaseError = error as { code: string; message: string };
-      console.error('Error Code:', firebaseError.code);
-      console.error('Error Message:', firebaseError.message);
-    } else {
-      console.error('Unexpected error:', error);
-    }
-  } finally {
-    window.location.href = '/content';
   }
-};
+
+  //window.location.href = "/content";
+}
+
+export async function signOutAll() {
+  const auth = getAuth(app);
+  await auth.signOut();
+  await fetch('/api/session', { method: 'DELETE', credentials: 'include' }); // เคลียร์คุกกี้
+  localStorage.removeItem('uID');
+  window.location.href = '/login';
+}
