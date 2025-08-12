@@ -14,8 +14,40 @@ interface formDetail {
 
 const Assessment = ({ prop }: { prop: Form[] }) => {
   const [form, setForm] = useState<Form[]>(prop);
-  function handleSubmit() {
-    alert('Form submitted');
+  const [comment, setComment] = useState<string>('');
+
+  async function handleSubmit() {
+    if (form.some(f => f.detail.some(d => d.star === 0))) {
+      alert('กรุณาให้คะแนนทุกข้อก่อนส่งแบบประเมิน');
+      return;
+    }
+
+    try {
+      const sections = form.map(f => ({
+        title: f.title,
+        items: f.detail.map(d => ({ text: d.text, star: d.star })),
+      }));
+
+      const res = await fetch('/api/assessment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          sections,
+          comment,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.message || 'ส่งแบบประเมินไม่สำเร็จ');
+        return;
+      }
+      alert('ขอบคุณสำหรับการประเมินค่ะ');
+    } catch (e) {
+      console.error(e);
+      alert('เกิดข้อผิดพลาด');
+    }
   }
   function handleStar(formIndex: number, detailIndex: number, star: number) {
     const updatedForm = form.map((f, i) => {
@@ -31,6 +63,23 @@ const Assessment = ({ prop }: { prop: Form[] }) => {
       return f;
     });
     setForm(updatedForm);
+    let nextForm = formIndex;
+    let nextDetail = detailIndex + 1;
+
+    if (nextDetail >= form[formIndex].detail.length) {
+      nextForm = formIndex + 1;
+      nextDetail = 0;
+    }
+
+    // ถ้ายังมีข้อถัดไปให้เลื่อนไป
+    const nextId = `q-${nextForm}-${nextDetail}`;
+    // ใช้ setTimeout หรือ requestAnimationFrame ให้ DOM อัปเดตก่อน
+    requestAnimationFrame(() => {
+      document.getElementById(nextId)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    });
   }
 
   return (
@@ -40,8 +89,15 @@ const Assessment = ({ prop }: { prop: Form[] }) => {
           <h4 className="font-bold font-sarabun text-[18px]">{f.title}</h4>
           <div className="flex flex-col" style={{ gap: '28px' }}>
             {f.detail.map((item, detailIndex) => (
-              <div key={detailIndex} className="flex flex-col gap-2">
-                <p className="font-sarabun text-[16px]">{item.text}</p>
+              <div
+                key={detailIndex}
+                id={`q-${formIndex}-${detailIndex}`}
+                className="flex flex-col gap-2"
+              >
+                <p className="font-sarabun text-[16px]">
+                  {item.text}
+                  <span className="text-red-400">*</span>
+                </p>
                 <div className="flex items-center justify-between">
                   <p>น้อยที่สุด</p>
                   <div className="flex">
@@ -69,6 +125,8 @@ const Assessment = ({ prop }: { prop: Form[] }) => {
         <textarea
           className="bg-white w-full min-h-[100px] p-2 rounded-md"
           placeholder="แสดงความคิดเห็นเพิ่มเติม"
+          value={comment}
+          onChange={e => setComment(e.target.value)}
         />
       </div>
       <button

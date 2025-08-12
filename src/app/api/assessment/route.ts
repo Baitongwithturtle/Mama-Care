@@ -1,53 +1,78 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { getAuth } from 'firebase-admin/auth';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { app } from '@/app/firebase/server';
 
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-export async function POST(request: Request) {
+type Item = { qid?: string; text: string; star: number };
+type Section = { title: string; items: Item[] };
+
+export async function POST(req: NextRequest) {
   try {
-    const body = await request.json();
-    const { uID, email, name } = body;
-    const quiz = {
-      '1': { quiz_plays: 0, score: null },
-      '2': { quiz_plays: 0, score: null },
-      '3': { quiz_plays: 0, score: null },
-      '4': { quiz_plays: 0, score: null },
-      '5': { quiz_plays: 0, score: null },
-      '6': { quiz_plays: 0, score: null },
-      '7': { quiz_plays: 0, score: null },
-      '8': { quiz_plays: 0, score: null },
-      '9': { quiz_plays: 0, score: null },
-      '10': { quiz_plays: 0, score: null },
+    // 1) verify session cookie (สำคัญ)
+    const sessionCookie = req.cookies.get('session')?.value;
+    if (!sessionCookie) {
+      return NextResponse.json(
+        { success: false, message: 'No session' },
+        { status: 401 }
+      );
+    }
+    const decoded = await auth.verifySessionCookie(sessionCookie, true);
+    const uid = decoded.uid;
+
+    // 2) read body
+    const body = await req.json();
+    const { sections, comment, version } = body as {
+      sections: Section[]; // [{ title, items:[{ text, star }] }]
+      comment?: string;
+      version?: string | number;
     };
 
-    if (!uID || !email) {
+    if (!Array.isArray(sections) || sections.length === 0) {
       return NextResponse.json(
-        { success: false, message: 'Missing uID or email' },
+        { success: false, message: 'Invalid sections' },
         { status: 400 }
       );
     }
 
-    const userDoc = await db.collection('UsersCollection').doc(uID).get();
-
-    if (userDoc.exists) {
-      return NextResponse.json(
-        { success: false, message: 'User already exists' },
-        { status: 409 }
-      );
+    // 3) sanitize: star ต้อง 0..5
+    for (const s of sections) {
+      if (!s?.title || !Array.isArray(s.items)) {
+        return NextResponse.json(
+          { success: false, message: 'Malformed section' },
+          { status: 400 }
+        );
+      }
+      for (const it of s.items) {
+        if (
+          typeof it.star !== 'number' ||
+          it.star < 0 ||
+          it.star > 5 ||
+          !it.text
+        ) {
+          return NextResponse.json(
+            { success: false, message: 'Malformed item' },
+            { status: 400 }
+          );
+        }
+      }
     }
 
-    const userRef = db.collection('UsersCollection').doc(uID);
-    await userRef.set({ email, name, created_at: Date.now() });
-    const quizRef = db.collection('QuizCollection').doc(uID);
-    await quizRef.set({ uID, quiz });
+    // 4) write to Firestore
+    const doc = {
+      userId: uid,
+      sections,
+      comment: comment ?? '',
+      submittedAt: FieldValue.serverTimestamp(),
+    };
 
-    return NextResponse.json({
-      success: true,
-      message: 'User created and Quiz record',
-    });
-  } catch (error) {
-    console.error('Error creating user:', error);
+    const ref = await db.collection('AssessmentCollection').add(doc);
+
+    return NextResponse.json({ success: true, id: ref.id });
+  } catch (err) {
+    console.error('POST /api/assessment error:', err);
     return NextResponse.json(
       { success: false, message: 'Internal server error' },
       { status: 500 }

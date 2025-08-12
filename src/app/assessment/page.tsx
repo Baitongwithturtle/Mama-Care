@@ -1,5 +1,6 @@
 import React from 'react';
 import Assessment from '@/component/assessment/assessment';
+import MenuBar from '@/component/menu_bar';
 
 interface Form {
   title: string;
@@ -70,6 +71,7 @@ const page = () => {
         alt="frame"
         className="fixed top-0 object-cover w-[447.96px] h-[36.5px]"
       />
+      <MenuBar />
       <div className="px-[20px] mt-4">
         <h1 className="text-[32px] font-extrabold font-sarabun text-center text-[#F0818C]">
           ความพึงพอใจในการใช้ <span className="text-nowrap">MaMa Care</span>

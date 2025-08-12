@@ -139,6 +139,27 @@ const MenuBar: React.FC = () => {
                     </span>
                   </div>
                 </button>
+                <button
+                  className="flex justify-center items-center gap-2 rounded-full bg-white border border-[#F0818C] w-full max-w-[280px] py-2"
+                  onClick={() => {
+                    window.location.href = '/assessment';
+                  }}
+                >
+                  <Image
+                    src="/assets/review.png"
+                    alt="frame"
+                    width={48}
+                    height={48}
+                  />
+                  <div className="text-center flex flex-col items-center">
+                    <p className="font-baloo text-[24px] leading-[24px] font-bold">
+                      Assessment
+                    </p>
+                    <span className="font-sarabun text-[14px]">
+                      แบบประเมิน
+                    </span>
+                  </div>
+                </button>
                 <h3 className="font-baloo text-[20px] leading-[20px] font-bold">
                   Profile
                 </h3>
