@@ -64,7 +64,7 @@ const MenuBar: React.FC = () => {
           <img
             src="/assets/5.webp"
             alt="frame"
-            className="absolute object-cover top-0"
+            className="absolute object-cover top-0 w-[447.96px] h-[36.5px]"
           />
 
           <div
@@ -186,7 +186,7 @@ const MenuBar: React.FC = () => {
           <img
             alt="curve"
             src="/assets/1.webp"
-            className="absolute object-cover bottom-0"
+            className="absolute object-cover bottom-0 w-[447.96px] h-[36.5px]"
           />
         </div>
       )}
