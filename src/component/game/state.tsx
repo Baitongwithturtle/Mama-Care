@@ -1,7 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-const state = () => {
+const State = () => {
   const router = useRouter();
   function handleState(state: number) {
     router.push(`quiz/${state}`);
@@ -138,4 +138,4 @@ const state = () => {
   );
 };
 
-export default state;
+export default State;

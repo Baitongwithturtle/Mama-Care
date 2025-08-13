@@ -3,7 +3,6 @@ import Quiz from '@/component/game/quiz';
 import React, { useEffect, useState } from 'react';
 import question from '@/quiz.json';
 import { useParams } from 'next/navigation';
-import MenuBar from '@/component/menu_bar';
 
 interface Question {
   id: number;
@@ -12,7 +11,7 @@ interface Question {
   answer: number;
 }
 
-const page = () => {
+const Page = () => {
   const params = useParams();
   const [quiz, setQuiz] = useState<Question | null>(null);
   useEffect(() => {
@@ -21,7 +20,7 @@ const page = () => {
       const found = question.find((q: Question) => q.id === id);
       if (found) setQuiz(found);
     }
-  }, [params.id]);
+  }, [params.quiz_id]);
   return (
     <div className="mobile flex flex-col items-center justify-start gap-4 relative pb-9 pt-12 px-[20px] overflow-hidden">
       <img
@@ -45,4 +44,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

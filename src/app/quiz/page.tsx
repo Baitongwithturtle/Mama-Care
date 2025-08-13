@@ -2,7 +2,7 @@ import State from '@/component/game/state';
 import MenuBar from '@/component/menu_bar';
 import React from 'react';
 
-const page = () => {
+const Page = () => {
   return (
     <div className="mobile flex flex-col items-center justify-between pb-9 pt-12 relative">
       <section className="flex flex-col items-center">
@@ -45,4 +45,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

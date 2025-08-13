@@ -26,11 +26,9 @@ export async function POST(req: NextRequest) {
       path: '/',
     });
     return res;
-  } catch (e: any) {
-    return NextResponse.json(
-      { error: e?.message ?? 'failed' },
-      { status: 401 }
-    );
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : 'failed';
+    return NextResponse.json({ error: msg }, { status: 401 });
   }
 }
 

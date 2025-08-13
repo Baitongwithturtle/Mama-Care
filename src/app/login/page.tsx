@@ -2,7 +2,7 @@
 import React from 'react';
 import { signInWithGoogle } from '@/app/firebase/auth';
 
-const page = () => {
+const Page = () => {
   function handleLogin() {
     signInWithGoogle();
   }
@@ -54,4 +54,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

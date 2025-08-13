@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { createPortal } from 'react-dom';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
@@ -155,9 +154,7 @@ const MenuBar: React.FC = () => {
                     <p className="font-baloo text-[24px] leading-[24px] font-bold">
                       Assessment
                     </p>
-                    <span className="font-sarabun text-[14px]">
-                      แบบประเมิน
-                    </span>
+                    <span className="font-sarabun text-[14px]">แบบประเมิน</span>
                   </div>
                 </button>
                 <h3 className="font-baloo text-[20px] leading-[20px] font-bold">

@@ -1,15 +1,16 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getFirestore } from 'firebase-admin/firestore';
 import { app } from '@/app/firebase/server';
 
+export const runtime = 'nodejs';
 const db = getFirestore(app);
 
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: { uID: string } }
-) {
+export async function GET(req: Request) {
   try {
-    const uID = params.uID?.trim();
+    const url = new URL(req.url);
+    const segments = url.pathname.split('/').filter(Boolean);
+    const uID = segments[segments.length - 1]?.trim();
+
     if (!uID) {
       return NextResponse.json(
         { success: false, message: 'Missing uID' },
@@ -26,8 +27,8 @@ export async function GET(
     }
 
     return NextResponse.json({ success: true, id: snap.id, user: snap.data() });
-  } catch (e) {
-    console.error('GET /api/users/[uID] error:', e);
+  } catch (err) {
+    console.error('GET /api/users/[uID] error:', err);
     return NextResponse.json(
       { success: false, message: 'Internal server error' },
       { status: 500 }

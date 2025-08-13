@@ -10,7 +10,7 @@ interface formDetail {
   text: string;
   star: number;
 }
-const page = () => {
+const Page = () => {
   const form: Form[] = [
     {
       title: 'ด้านเนื้อหา',
@@ -87,4 +87,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -58,48 +58,25 @@ export async function POST(req: NextRequest) {
       message: 'User created and quiz record initialized',
       uid,
     });
-  } catch (err: any) {
-    // Handle "already exists" gracefully
-    if (err?.code === 6 || /ALREADY_EXISTS/i.test(String(err?.message))) {
-      return NextResponse.json(
-        { success: false, message: 'User already exists' },
-        { status: 409 }
-      );
+  } catch (err: unknown) {
+    if (
+      typeof err === 'object' &&
+      err !== null &&
+      ('code' in err || 'message' in err)
+    ) {
+      const firebaseErr = err as { code?: number; message?: string };
+      if (
+        firebaseErr.code === 6 ||
+        /ALREADY_EXISTS/i.test(String(firebaseErr.message))
+      ) {
+        return NextResponse.json(
+          { success: false, message: 'User already exists' },
+          { status: 409 }
+        );
+      }
     }
+
     console.error('Create user error:', err);
-    return NextResponse.json(
-      { success: false, message: 'Internal server error' },
-      { status: 500 }
-    );
-  }
-}
-
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    // verify session cookie
-    const sessionCookie = req.cookies.get('session')?.value;
-    if (!sessionCookie) {
-      return NextResponse.json(
-        { success: false, message: 'No session' },
-        { status: 401 }
-      );
-    }
-    await auth.verifySessionCookie(sessionCookie, true);
-
-    const uid = params.id;
-    const userDoc = await db.collection('UsersCollection').doc(uid).get();
-    if (!userDoc.exists) {
-      return NextResponse.json(
-        { success: false, message: 'User not found' },
-        { status: 404 }
-      );
-    }
-    return NextResponse.json({ success: true, user: userDoc.data() });
-  } catch (err) {
-    console.error('GET user error:', err);
     return NextResponse.json(
       { success: false, message: 'Internal server error' },
       { status: 500 }

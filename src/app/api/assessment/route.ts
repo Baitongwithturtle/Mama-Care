@@ -24,10 +24,9 @@ export async function POST(req: NextRequest) {
 
     // 2) read body
     const body = await req.json();
-    const { sections, comment, version } = body as {
+    const { sections, comment } = body as {
       sections: Section[]; // [{ title, items:[{ text, star }] }]
       comment?: string;
-      version?: string | number;
     };
 
     if (!Array.isArray(sections) || sections.length === 0) {

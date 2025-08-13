@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '@/component/nav_bar';
 import MenuBar from '@/component/menu_bar';
 
 export default function causepage() {
