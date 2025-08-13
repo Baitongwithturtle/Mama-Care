@@ -9,7 +9,7 @@ const Page = () => {
         <img
           src="assets/5.webp"
           alt="frame"
-          className="fixed top-0 object-cover w-[447.96px] h-[36.5px]"
+          className="absolute top-0 object-cover w-[447.96px] h-[36.5px]"
         />
         <MenuBar />
         <div className="relative py-8">
@@ -39,7 +39,7 @@ const Page = () => {
       <img
         alt="curve"
         src="assets/1.webp"
-        className="fixed bottom-0 object-cover w-[447.96px] h-[36.5px]"
+        className="absolute bottom-0 object-cover w-[447.96px] h-[36.5px]"
       />
     </div>
   );

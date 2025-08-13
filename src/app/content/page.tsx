@@ -30,7 +30,7 @@ const page = () => {
       <img
         src="assets/5.webp"
         alt="frame"
-        className="fixed top-0 object-cover w-[447.96px] h-[36.5px]"
+        className="absolute top-0 object-cover w-[447.96px] h-[36.5px]"
       />
       <MenuBar />
       <div className="flex flex-col items-center justify-center w-full px-[20px] gap-4">
@@ -67,7 +67,7 @@ const page = () => {
       <img
         alt="curve"
         src="assets/1.webp"
-        className="fixed bottom-0 object-cover w-[447.96px] h-[36.5px]"
+        className="absolute bottom-0 object-cover w-[447.96px] h-[36.5px]"
       />
     </div>
   );

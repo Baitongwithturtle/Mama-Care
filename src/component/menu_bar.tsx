@@ -61,7 +61,11 @@ const MenuBar: React.FC = () => {
 
       {mounted && open && (
         <div className="absolute inset-0  z-[9999] bg-[#fcf9da]">
-          <img src="/assets/5.webp" alt="frame" className="absolute top-0" />
+          <img
+            src="/assets/5.webp"
+            alt="frame"
+            className="absolute object-cover top-0"
+          />
 
           <div
             role="dialog"
@@ -179,7 +183,11 @@ const MenuBar: React.FC = () => {
             <X className="h-7 w-7" />
             <span className="sr-only">Close</span>
           </button>
-          <img alt="curve" src="/assets/1.webp" className="absolute bottom-0" />
+          <img
+            alt="curve"
+            src="/assets/1.webp"
+            className="absolute object-cover bottom-0"
+          />
         </div>
       )}
     </>
