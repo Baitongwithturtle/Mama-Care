@@ -74,7 +74,12 @@
   {
     "id": 8,
     "question": "ภาพใดแสดงถึงลักษณะของแผลผ่าตัดคลอดติดเชื้อ?",
-    "choices": ["/assets/choice1.jpg", "/assets/choice2.jpg", "/assets/choice3.jpg", "/assets/choice4.jpg"],
+    "choices": [
+      "/assets/choice1.jpg",
+      "/assets/choice2.jpg",
+      "/assets/choice3.jpg",
+      "/assets/choice4.jpg"
+    ],
     "answer": 3
   },
   {

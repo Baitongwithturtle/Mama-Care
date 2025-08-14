@@ -126,10 +126,13 @@ const Quiz = ({ question }: { question: Question | null }) => {
           <p className="mt-10 text-lg font-sarabun font-semibold">
             {question.question}
           </p>
-          <ul className="mt-8 space-y-4 w-full flex flex-col items-center">
+          <ul className="mt-8 space-y-4 w-full flex flex-col items-center justify-center">
             {question.choices.map((choice, index) => (
-              <li key={index} className="text-base w-full relative">
-                <div className="flex rounded-full bg-white outline-4 outline-[#F0818C] border-dashed border-2 w-[44px] h-[44px] justify-center items-center top-1/2 -translate-y-1/2 absolute">
+              <li
+                key={index}
+                className={`text-base relative ${params.quiz_id == '8' ? 'w-fit' : 'w-full'}`}
+              >
+                <div className="flex rounded-full bg-white outline-4 outline-[#F0818C] border-dashed border-2 w-[44px] h-[44px] justify-center items-center top-1/2 -translate-y-1/2 left-0 absolute">
                   <p className="font-baloo text-[24px] leading-[20px] font-extrabold">
                     {index + 1}
                   </p>
@@ -144,13 +147,23 @@ const Quiz = ({ question }: { question: Question | null }) => {
                           ? 'bg-[#FF6C6C]'
                           : 'bg-[#FFD0D8]'
                       : 'bg-[#FFD0D8]'
-                  }${params.quiz_id=="8" ? " flex w-fit justify-center items-center p-2" : "w-full"}`}
+                  } ${params.quiz_id == '8' ? ' flex w-fit justify-center items-center p-2' : 'w-full'}`}
                   onClick={() =>
                     handleAnswer(index, index + 1 === question.answer)
                   }
                   disabled={answer !== undefined} // ป้องกันตอบซ้ำ
                 >
-                  {(params.quiz_id=="8")? <Image alt='choice' src={choice} width={300} height={0}></Image>:(choice)}
+                  {params.quiz_id == '8' ? (
+                    <Image
+                      alt="choice"
+                      src={choice}
+                      width={250}
+                      height={0}
+                      className="rounded-md"
+                    ></Image>
+                  ) : (
+                    choice
+                  )}
                 </button>
               </li>
             ))}

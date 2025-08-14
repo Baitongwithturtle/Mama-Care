@@ -36,9 +36,10 @@ export default function Page() {
           <div className="flex flex-col justify-center px-4">
             <p className="font-sarabun text-lg leading-relaxed">
               คลิปนี้แนะนำเทคนิคดูแลแผลผ่าคลอดให้หายไว
-              โดยเน้นการปฏิบัติตัวที่ถูกต้อง เช่น <span className ="text-nowrap">หลีกเลี่ยง</span>ยกของหนัก
-              ใช้ผ้ารัดหน้าท้อง <span className ="text-nowrap">พักผ่อน</span>ให้เพียงพอ และดูแลแผลให้แห้งสะอาด
-              ควรรับประทานอาหารที่มีโปรตีนสูง
+              โดยเน้นการปฏิบัติตัวที่ถูกต้อง เช่น{' '}
+              <span className="text-nowrap">หลีกเลี่ยง</span>ยกของหนัก
+              ใช้ผ้ารัดหน้าท้อง <span className="text-nowrap">พักผ่อน</span>
+              ให้เพียงพอ และดูแลแผลให้แห้งสะอาด ควรรับประทานอาหารที่มีโปรตีนสูง
               เพื่อช่วยซ่อมแซมแผลและฟื้นตัวเร็วขึ้น
             </p>
           </div>

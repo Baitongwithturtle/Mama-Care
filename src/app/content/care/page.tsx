@@ -29,7 +29,7 @@ function page() {
           คำแนะนำ
         </h1>
         <h1 className="items-center font-bold font-sarabun text-[24px] ">
-          <span className ="text-nowrap">การดูแลแผลผ่าคลอดทางหน้าท้อง</span>
+          <span className="text-nowrap">การดูแลแผลผ่าคลอดทางหน้าท้อง</span>
         </h1>
       </div>
       <div className="grid grid-cols-1 gap-12 mt-12">
