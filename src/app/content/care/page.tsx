@@ -22,21 +22,21 @@ function page() {
       </div>
       {/*เนื้อหา*/}
       <div
-        className="bg-[#FAF0D9] shadow-[_8px_10px_white]  w-120 h-40 p-6 rounded-xl items-center"
+        className="bg-[#FAF0D9] shadow-[_8px_10px_white] w-92 h-40 p-6 rounded-xl items-center"
         onClick={() => handleClick('guidelines')}
       >
         <h1 className="text-center font-bold font-sarabun text-[32px] mt-2">
           คำแนะนำ
         </h1>
-        <h1 className="items-center font-bold font-sarabun text-[30px] ">
-          การดูแลแผลผ่าคลอดทางหน้าท้อง
+        <h1 className="items-center font-bold font-sarabun text-[24px] ">
+          <span className ="text-nowrap">การดูแลแผลผ่าคลอดทางหน้าท้อง</span>
         </h1>
       </div>
-      <div className="grid grid-cols-2 gap-12 mt-12">
+      <div className="grid grid-cols-1 gap-12 mt-12">
         {/* แผลผ่าคลอด */}
         <div className="flex flex-col items-center">
           <div
-            className="bg-[#FAF0D9] shadow-[_8px_10px_white] w-70 h-50 p-6 rounded-xl items-center"
+            className="bg-[#FAF0D9] shadow-[_8px_10px_white] w-90 h-50 p-6 rounded-xl items-center"
             onClick={() => handleClick('abnormal')}
           >
             <p className="text-center font-bold font-sarabun text-[28px] mt-4">
@@ -49,7 +49,7 @@ function page() {
         </div>
         <div className="flex flex-col items-center">
           <div
-            className="bg-[#FAF0D9] shadow-[_8px_10px_white] w-70 h-50 p-6 rounded-xl items-center "
+            className="bg-[#FAF0D9] shadow-[_8px_10px_white] w-90 h-50 p-6 rounded-xl items-center "
             onClick={() => handleClick('video')}
           >
             <p className="text-center font-bold font-sarabun text-[28px] mt-4">

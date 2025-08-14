@@ -7,12 +7,12 @@ function page() {
       <MenuBar />
 
       {/* หัวข้อ */}
-      <div className="items-center flex justify-center bg-[#AADAD5] font-sarabun font-bold w-3xl min-h-[40px] px-8 border border-white text-2x gap-2 mb-2">
+      <div className="items-center flex justify-center bg-[#AADAD5] font-sarabun font-bold w-full min-h-[40px] px-8 border border-white text-2x gap-2 mb-2">
         <img alt="chem" src="/assets/13.webp" width={40} />
-        <h1 className="text-2xl">อาการและอาการแสดงจากการติดเชื้อ</h1>
+        <h1 className="text-l">อาการและอาการแสดงจากการติดเชื้อ</h1>
       </div>
       {/* เนื้อหา */}
-      <div className="grid grid-cols-2 gap-10 py-6">
+      <div className="grid grid-cols-1 gap-10 py-6">
         {/* อ้วน */}
         <div className="flex flex-col items-center bg-white">
           <div className=" border-[#FF8EAF] border-5 p-4 pb-1 rounded-xl shadow-[_8px_10px_pink]  w-70 h-50 items-center">

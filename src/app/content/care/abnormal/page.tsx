@@ -6,7 +6,7 @@ export default function Page() {
     <div className="mobile bg-[#FCF9DA] p-6 flex flex-col items-center font-baloo">
       <MenuBar />
 
-      <div className="items-center flex justify-center bg-[#AADAD5] font-sarabun font-bold w-200 min-h-[40px] px-8 border border-white text-2x gap-2 mb-10">
+      <div className="items-center flex justify-center bg-[#AADAD5] font-sarabun font-bold w-fit  min-h-[40px] px-8 border border-white text-2x gap-2 mb-10">
         <img alt="care" src="/assets/14.webp" width={40} />
         <h1 className="text-[30px]">การดูแลแผลผ่าตัด</h1>
       </div>
@@ -21,7 +21,7 @@ export default function Page() {
       </div>
       {/*เนื้อหา*/}
       <div className="flex flex-col items-center">
-        <div className="border-[#73B8B3] border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_rgba(121,173,154,1)] w-120 h-65 flex flex-col items-center gap-2 mt-8  bg-white">
+        <div className="border-[#73B8B3] border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_rgba(121,173,154,1)] w-full h-65 flex flex-col items-center gap-2 mt-8  bg-white">
           <img
             src="/assets/39.webp"
             alt="รูปอ้วน"
@@ -34,7 +34,7 @@ export default function Page() {
       </h2>
 
       <div className="flex flex-col items-center">
-        <div className="border-[#FF8EAF] border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_pink] w-120 h-65 flex flex-col items-center gap-2 mt-8  bg-white">
+        <div className="border-[#FF8EAF] border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_pink] w-full h-65 flex flex-col items-center gap-2 mt-8  bg-white">
           <img
             src="/assets/40.webp"
             alt="รูปอ้วน"
@@ -50,7 +50,7 @@ export default function Page() {
       </h2>
 
       <div className="flex flex-col items-center">
-        <div className="border-[#5a8f8b] border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_rgba(121,173,154,1)] w-120 h-65 flex flex-col items-center gap-2 mt-8  bg-white">
+        <div className="border-[#5a8f8b] border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_rgba(121,173,154,1)] w-full h-65 flex flex-col items-center gap-2 mt-8  bg-white">
           <img
             src="/assets/41.webp"
             alt="รูปอ้วน"
@@ -63,7 +63,7 @@ export default function Page() {
       </h2>
 
       <div className="flex flex-col items-center">
-        <div className="border-[#FF8EAF]  border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_pink] w-120 h-65 flex flex-col items-center gap-2 mt-8  bg-white">
+        <div className="border-[#FF8EAF]  border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_pink] w-full h-65 flex flex-col items-center gap-2 mt-8  bg-white">
           <img
             src="/assets/42.webp"
             alt="รูปอ้วน"
@@ -76,7 +76,7 @@ export default function Page() {
       </h2>
 
       <div className="flex flex-col items-center">
-        <div className="border-[#73B8B3] border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_rgba(121,173,154,1)] w-120 h-65 flex flex-col items-center gap-2 mt-8  bg-white">
+        <div className="border-[#73B8B3] border-2 p-2 pb-1 rounded-xl shadow-[_8px_10px_rgba(121,173,154,1)] w-full h-65 flex flex-col items-center gap-2 mt-8  bg-white">
           <img
             src="/assets/43.webp"
             alt="รูปอ้วน"

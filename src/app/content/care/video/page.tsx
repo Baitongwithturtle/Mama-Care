@@ -6,7 +6,7 @@ export default function Page() {
     <div className="mobile bg-[#FCF9DA] p-6 flex flex-col items-center font-baloo ">
       <MenuBar />
 
-      <div className="items-center flex justify-center bg-[#AADAD5] font-sarabun font-bold w-200 min-h-[40px] px-8 border border-white text-2x gap-2 mb-10">
+      <div className="items-center flex justify-center bg-[#AADAD5] font-sarabun font-bold w-fit  min-h-[40px] px-8 border border-white text-2x gap-2 mb-10">
         <img alt="care" src="/assets/14.webp" width={40} />
         <h1 className="text-[30px]">การดูแลแผลผ่าตัด</h1>
       </div>
@@ -17,13 +17,13 @@ export default function Page() {
         </h1>
       </div>
       {/*เนื้อหา*/}
-      <div className="bg-[#FFF5E6] p-4 rounded-xl border-2 border-[#73B8B3] shadow-[8px_10px_rgba(121,173,154,1)] w-[900px] flex flex-col mt-10">
-        <div className="flex">
+      <div className="bg-[#FFF5E6] p-4 rounded-xl border-2 border-[#73B8B3] shadow-[8px_10px_rgba(121,173,154,1)] w-full flex flex-col mt-10">
+        <div className="flex flex-wrap gap-4">
           {/*หัวข้อ*/}
           <div>
             <iframe
-              width="560"
-              height="315"
+              width="360"
+              height="250"
               src="https://www.youtube.com/embed/9qg6yN6CXlc"
               title="YouTube video player"
               frameBorder="0"
@@ -36,8 +36,8 @@ export default function Page() {
           <div className="flex flex-col justify-center px-4">
             <p className="font-sarabun text-lg leading-relaxed">
               คลิปนี้แนะนำเทคนิคดูแลแผลผ่าคลอดให้หายไว
-              โดยเน้นการปฏิบัติตัวที่ถูกต้อง เช่น หลีกเลี่ยงยกของหนัก
-              ใช้ผ้ารัดหน้าท้อง พักผ่อนให้เพียงพอ และดูแลแผลให้แห้งสะอาด
+              โดยเน้นการปฏิบัติตัวที่ถูกต้อง เช่น <span className ="text-nowrap">หลีกเลี่ยง</span>ยกของหนัก
+              ใช้ผ้ารัดหน้าท้อง <span className ="text-nowrap">พักผ่อน</span>ให้เพียงพอ และดูแลแผลให้แห้งสะอาด
               ควรรับประทานอาหารที่มีโปรตีนสูง
               เพื่อช่วยซ่อมแซมแผลและฟื้นตัวเร็วขึ้น
             </p>
@@ -61,13 +61,13 @@ export default function Page() {
         </p>
       </div>
 
-      <div className="bg-[#FFF5E6] p-4 rounded-xl border-2 border-[#FF8EAF]  shadow-[_8px_10px_pink] w-[900px] flex flex-col mt-10">
-        <div className="flex">
+      <div className="bg-[#FFF5E6] p-4 rounded-xl border-2 border-[#FF8EAF]  shadow-[_8px_10px_pink] w-full flex flex-col mt-10">
+        <div className="flex flex-wrap gap-4">
           {/*หัวข้อ*/}
           <div>
             <iframe
-              width="560"
-              height="315"
+              width="360"
+              height="250"
               src="https://www.youtube.com/embed/W-9EenslZL4"
               title="YouTube video player"
               frameBorder="0"

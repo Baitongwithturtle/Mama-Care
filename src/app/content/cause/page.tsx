@@ -7,7 +7,7 @@ export default function causepage() {
       <MenuBar />
 
       {/* หัวข้อ */}
-      <div className="items-center flex justify-center bg-[#AADAD5] font-baloo font-bold w-200 min-h-[40px] px-8 border border-white gap-2 mb-12">
+      <div className="items-center flex justify-center bg-[#AADAD5] font-baloo font-bold w-fit min-h-[40px] px-8 border border-white gap-2 mb-12">
         <img alt="glass" src="/assets/8.webp" width={40} />
         <h1 className="text-2xl">สาเหตุของการติดเชื้อ</h1>
       </div>

@@ -15,11 +15,6 @@ const page = () => {
       path: '/content/symptoms',
     },
     {
-      title: 'การป้องกันการติดเชื้อของแผล',
-      image: '/assets/plaster.png',
-      path: '/content/protection',
-    },
-    {
       title: 'การดูแลแผลผ่าตัด',
       image: '/assets/heart.png',
       path: '/content/care',

@@ -5,12 +5,12 @@ export default function Page() {
   return (
     <div className="mobile bg-[#FCF9DA] p-6 flex flex-col items-center font-baloo">
       <MenuBar />
-      <div className="items-center flex justify-center bg-[#AADAD5] font-sarabun font-bold w-200 min-h-[40px] px-8 border border-white text-2x gap-2 mb-10">
+      <div className="items-center flex justify-center bg-[#AADAD5] font-sarabun font-bold w-fit  min-h-[40px] px-8 border border-white text-2x gap-2 mb-10">
         <img alt="care" src="/assets/14.webp" width={40} />
         <h1 className="text-[30px]">การดูแลแผลผ่าตัด</h1>
       </div>
       {/*เนื้อหา*/}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-6">
         <div className="flex flex-col items-center bg-white">
           <div className="border-[#FF8EAF] border-2 p-4 pb-1 rounded-xl shadow-[_8px_10px_pink] w-80 h-80 flex flex-col items-center">
             <p className="font-sarabun text-center font-bold">
@@ -155,9 +155,7 @@ export default function Page() {
             />
           </div>
         </div>
-      </div>
-      <div className="flex flex-col items-center py-3">
-        <div className="border-[#73B8B3] border-2 p-4 pb-1 rounded-xl shadow-[_8px_10px_rgba(121,173,154,1)] w-150 h-80 flex flex-col items-center bg-white">
+        <div className="border-[#73B8B3] border-2 p-4 pb-1 rounded-xl shadow-[_8px_10px_rgba(121,173,154,1)] w-80 h-80 flex flex-col items-center bg-white">
           <p className="font-sarabun text-center font-bold">
             มาพบแพทย์เพื่อตรวจดูแผล ทำแผล{' '}
           </p>
@@ -171,6 +169,6 @@ export default function Page() {
           />
         </div>
       </div>
-    </div>
+      </div>
   );
 }
