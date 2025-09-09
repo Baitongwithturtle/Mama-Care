@@ -59,6 +59,13 @@ export async function signInWithName(name: string) {
       credentials: 'include',
       body: JSON.stringify({ uid: data.uid }),
     });
+
+    const inc = await fetch(`/api/users/login/${data.uid}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+    });
+    if (!inc.ok) throw new Error('เพิ่มจำนวนการเข้าสู่ระบบไม่สำเร็จ');
     if (!sess.ok) throw new Error('ตั้ง session ไม่สำเร็จ');
 
     localStorage.setItem('uID', data.uid);
@@ -89,7 +96,7 @@ export async function signInWithName(name: string) {
 export async function signOutAll() {
   await fetch('/api/auth/logout', {
     method: 'POST',
-    credentials: 'include', // ต้อง include cookie ด้วย
+    credentials: 'include',
   });
 
   localStorage.removeItem('uID');

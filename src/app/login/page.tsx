@@ -201,7 +201,7 @@ const Page = () => {
         />
         <button
           onClick={handleOpenPolicy}
-          className="px-6 py-3 bg-pinky text-white font-baloo text-[12px] leading-[12px] text-center font-medium rounded-full shadow-md border border-[#DD6774] hover:text-[#DD6774] hover:bg-[#FFDDE6] transition-colors"
+          className="px-6 py-3 pb-2 bg-pinky text-white font-baloo text-[12px] leading-[12px] text-center font-medium rounded-full shadow-md border border-[#DD6774] hover:text-[#DD6774] hover:bg-[#FFDDE6] transition-colors"
         >
           Submit
         </button>
