@@ -1,6 +1,5 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { app } from './client';
-
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
@@ -37,10 +36,62 @@ export async function signInWithGoogle() {
   window.location.href = '/content';
 }
 
+export async function signInWithName(name: string) {
+  const trimmed = name.trim();
+  if (!trimmed) {
+    alert('กรุณากรอกชื่อ');
+    throw new Error('กรุณากรอกชื่อ');
+  }
+
+  const checkResp = await fetch(
+    `/api/users?name=${encodeURIComponent(trimmed)}`,
+    {
+      credentials: 'include',
+    }
+  );
+
+  if (checkResp.ok) {
+    const data = await checkResp.json();
+
+    const sess = await fetch('/api/auth/set-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ uid: data.uid }),
+    });
+    if (!sess.ok) throw new Error('ตั้ง session ไม่สำเร็จ');
+
+    localStorage.setItem('uID', data.uid);
+    window.location.assign('/content');
+    return;
+  }
+
+  if (checkResp.status === 404) {
+    const createResp = await fetch('/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ name: trimmed }),
+    });
+    const data = await createResp.json();
+    if (!createResp.ok || !data.success) {
+      throw new Error(data?.message ?? 'สร้าง user ล้มเหลว');
+    }
+
+    localStorage.setItem('uID', data.uid);
+    window.location.assign('/content');
+    return;
+  }
+
+  throw new Error('เชื่อมต่อระบบไม่ได้');
+}
+
 export async function signOutAll() {
-  const auth = getAuth(app);
-  await auth.signOut();
-  await fetch('/api/session', { method: 'DELETE', credentials: 'include' }); // เคลียร์คุกกี้
+  await fetch('/api/auth/logout', {
+    method: 'POST',
+    credentials: 'include', // ต้อง include cookie ด้วย
+  });
+
   localStorage.removeItem('uID');
   window.location.href = '/login';
 }

@@ -11,22 +11,11 @@ type Section = { title: string; items: Item[] };
 
 export async function POST(req: NextRequest) {
   try {
-    // 1) verify session cookie (สำคัญ)
-    const sessionCookie = req.cookies.get('session')?.value;
-    if (!sessionCookie) {
-      return NextResponse.json(
-        { success: false, message: 'No session' },
-        { status: 401 }
-      );
-    }
-    const decoded = await auth.verifySessionCookie(sessionCookie, true);
-    const uid = decoded.uid;
-
-    // 2) read body
     const body = await req.json();
-    const { sections, comment } = body as {
+    const { sections, comment, uid } = body as {
       sections: Section[]; // [{ title, items:[{ text, star }] }]
       comment?: string;
+      uid: string;
     };
 
     if (!Array.isArray(sections) || sections.length === 0) {

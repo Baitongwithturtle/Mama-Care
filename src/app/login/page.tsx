@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { signInWithGoogle } from '@/app/firebase/auth';
+import { signInWithGoogle, signInWithName } from '@/app/firebase/auth';
 const Privacy: React.FC = () => {
   return (
     <article className="flex flex-col items-center font-sarabun text-[14px] gap-2">
@@ -148,7 +148,7 @@ const Privacy: React.FC = () => {
 const Page = () => {
   const [isPolicyOpen, setIsPolicyOpen] = useState(false);
   const [agreed, setAgreed] = useState(false);
-
+  const [name, setName] = useState('');
   useEffect(() => {
     if (isPolicyOpen) {
       document.body.style.overflow = 'hidden';
@@ -165,9 +165,14 @@ const Page = () => {
     setAgreed(false);
   }
 
-  function handleConfirmLogin() {
+  /*function handleConfirmLogin() {
     if (!agreed) return;
     signInWithGoogle();
+  }*/
+
+  function handleConfirmLogin(name: string) {
+    if (!agreed) return;
+    signInWithName(name);
   }
 
   return (
@@ -184,28 +189,23 @@ const Page = () => {
         height={0}
       ></img>
       <div className="flex flex-col items-center gap-2">
-        <h1 className="text-[52px] leading-[52px] font-bold font-baloo">
-          Login Here
-        </h1>
-        <h2 className="text-[24px] leading-[24px] font-semibold">
-          Welcome to planner
+        <h2 className="text-[24px] leading-[24px] font-semibold font-sarabun">
+          กรุณากรอกชื่อของคุณ
         </h2>
       </div>
-
-      <button
-        onClick={handleOpenPolicy}
-        className="flex items-center justify-center gap-2 px-20 py-2 bg-white border border-[#DD6774] rounded-full shadow hover:bg-[#fff2f6] transition"
-      >
-        <img
-          alt="google icon"
-          src="assets/google.svg"
-          width={20}
-          height={20}
-        ></img>
-        <p className="text-nowrap font-baloo text-[16px] leading-[16px]">
-          Login with Google
-        </p>
-      </button>
+      <div className="flex flex-col items-center gap-2">
+        <input
+          className="text-lg font-semibold py-2 px-4 text-[#DD6774] font-sarabun text-center border border-pinky rounded-full bg-white focus:outline-none shadow-md"
+          placeholder="ชื่อของคุณ"
+          onChange={e => setName(e.target.value)}
+        />
+        <button
+          onClick={handleOpenPolicy}
+          className="px-6 py-3 bg-pinky text-white font-baloo text-[12px] leading-[12px] text-center font-medium rounded-full shadow-md border border-[#DD6774] hover:text-[#DD6774] hover:bg-[#FFDDE6] transition-colors"
+        >
+          Submit
+        </button>
+      </div>
       <img alt="foot" src="assets/3.webp" width={200} />
       <img
         alt="curve"
@@ -257,7 +257,7 @@ const Page = () => {
                   ยกเลิก
                 </button>
                 <button
-                  onClick={handleConfirmLogin}
+                  onClick={() => handleConfirmLogin(name)}
                   disabled={!agreed}
                   className={`px-5 py-2 rounded-full transition shadow
               ${

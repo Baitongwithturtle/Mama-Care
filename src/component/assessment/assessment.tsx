@@ -33,6 +33,7 @@ const Assessment = ({ prop }: { prop: Form[] }) => {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({
+          uid: localStorage.getItem('uID'),
           sections,
           comment,
         }),

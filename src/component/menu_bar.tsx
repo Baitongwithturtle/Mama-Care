@@ -165,7 +165,7 @@ const MenuBar: React.FC = () => {
                   Profile
                 </h3>
                 <p className="font-baloo text-[16px] leading-[16px]">
-                  {user?.email}
+                  {user?.name}
                 </p>
                 <button
                   onClick={signOutAll}
