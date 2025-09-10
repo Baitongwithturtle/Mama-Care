@@ -6,12 +6,13 @@ export const runtime = 'nodejs';
 const db = getFirestore(app);
 
 export async function PATCH(
-  req: NextRequest,
-  { params }: { params: { uID: string } }
+  request: Request
 ) {
   try {
-    console.log('Increment login count for uID:', params.uID);
-    const userRef = db.collection('UsersCollection').doc(params.uID);
+    const url = new URL(request.url);
+    const segments = url.pathname.split('/').filter(Boolean);
+    const uID = segments[segments.length - 1]?.trim();
+    const userRef = db.collection('UsersCollection').doc(uID);
     await userRef.update({
       login_count: FieldValue.increment(1),
       last_login: FieldValue.serverTimestamp(),
