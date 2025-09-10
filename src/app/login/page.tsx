@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { signInWithGoogle, signInWithName } from '@/app/firebase/auth';
+import Loading from '../loading';
 const Privacy: React.FC = () => {
   return (
     <article className="flex flex-col items-center font-sarabun text-[14px] gap-2">
@@ -169,14 +170,22 @@ const Page = () => {
     if (!agreed) return;
     signInWithGoogle();
   }*/
+  const [loading, setLoading] = useState(false);
 
-  function handleConfirmLogin(name: string) {
-    if (!agreed) return;
-    signInWithName(name);
+  async function handleConfirmLogin(name: string) {
+    try {
+      setLoading(true);
+      setIsPolicyOpen(false);
+      await signInWithName(name);
+    } catch (e) {
+      alert((e as Error).message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
-    <div className="flex flex-col mobile  items-center justify-center gap-8 pt-12 pb-9">
+    <div className="flex flex-col mobile items-center justify-center gap-8 pt-12 pb-9">
       <img
         src="assets/5.webp"
         alt="frame"
@@ -271,6 +280,11 @@ const Page = () => {
               </div>
             </div>
           </div>
+        </div>
+      )}
+      {loading && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center">
+          <Loading />
         </div>
       )}
     </div>

@@ -61,7 +61,7 @@ export async function signInWithName(name: string) {
     });
 
     const inc = await fetch(`/api/users/login/${data.uid}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
     });

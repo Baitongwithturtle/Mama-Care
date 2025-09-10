@@ -5,9 +5,9 @@ import { Loader2 } from 'lucide-react';
 
 export default function Loading() {
   return (
-    <div className="flex mobile items-center justify-center">
+    <div className="flex mobile items-center justify-center w-full">
       <img
-        src="assets/5.webp"
+        src="/assets/5.webp"
         alt="frame"
         className="absolute top-0 object-cover w-[447.96px] h-[36.5px]"
       />
@@ -15,7 +15,7 @@ export default function Loading() {
         <div className="loader"></div>
       </div>
       <img
-        src="assets/1.webp"
+        src="/assets/1.webp"
         alt="frame"
         className="absolute bottom-0 object-cover w-[447.96px] h-[36.5px]"
       />

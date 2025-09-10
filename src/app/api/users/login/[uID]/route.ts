@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { app } from '@/app/firebase/server';
 
+export const runtime = 'nodejs';
 const db = getFirestore(app);
 
-export async function PUT(
+export async function PATCH(
   req: NextRequest,
   { params }: { params: { uID: string } }
 ) {
