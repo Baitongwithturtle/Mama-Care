@@ -87,3 +87,39 @@ body {
     transform: scale(0.9);
   }
 }
+
+.loader-sm {
+  display: block;
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.loader-sm:before,
+.loader-sm:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #f0818c;
+  transform: translate(-50%, -100%) scale(0);
+  animation: push_401 2s infinite linear;
+}
+
+.loader-sm:after {
+  animation-delay: 1s;
+}
+
+@keyframes push_401 {
+  0%,
+  50% {
+    transform: translate(-50%, 0%) scale(1);
+  }
+
+  100% {
+    transform: translate(-50%, -100%) scale(0);
+  }
+}

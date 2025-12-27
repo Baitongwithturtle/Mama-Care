@@ -5,9 +5,7 @@ import { app } from '@/app/firebase/server';
 export const runtime = 'nodejs';
 const db = getFirestore(app);
 
-export async function PATCH(
-  request: Request
-) {
+export async function PATCH(request: Request) {
   try {
     const url = new URL(request.url);
     const segments = url.pathname.split('/').filter(Boolean);
