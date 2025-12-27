@@ -1,9 +1,8 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowBigUp, Loader2 } from 'lucide-react';
+import { ArrowBigUp } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import MenuBar from '@/component/menu_bar';
-import { motion } from 'framer-motion';
 
 const Page = () => {
   const [prompt, setPrompt] = useState('');

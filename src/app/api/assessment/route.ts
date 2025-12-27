@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuth } from 'firebase-admin/auth';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 import { app } from '@/app/firebase/server';
 
-const auth = getAuth(app);
 const db = getFirestore(app);
 
 type Item = { qid?: string; text: string; star: number };

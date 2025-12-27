@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { signInWithGoogle, signInWithName } from '@/app/firebase/auth';
+import { signInWithName } from '@/app/firebase/auth';
 import Loading from '../loading';
 const Privacy: React.FC = () => {
   return (

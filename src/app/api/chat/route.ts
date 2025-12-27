@@ -27,11 +27,16 @@ export async function POST(req: NextRequest) {
     const content = response.choices[0].message?.content ?? '❌ ไม่มีคำตอบ';
 
     return NextResponse.json({ message: content });
-  } catch (error: any) {
+    // ... โค้ดส่วนบน ...
+  } catch (error: unknown) {
     console.error('API error:', error);
-    return NextResponse.json(
-      { error: error.message || 'Internal Server Error' },
-      { status: 500 }
-    );
+
+    let errorMessage = 'Internal Server Error';
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
